@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://savannah123:H8Hb9pupnF6qWlaV@cluster0-8npzr.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://savannah123:H8Hb9pupnF6qWlaV@cluster0-8npzr.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }

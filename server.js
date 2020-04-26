@@ -7,6 +7,11 @@ const connectDB = require('./config/db.js');
 const app = express();
 //conecct db
 connectDB();
+
+//initialize middleware for body parser- included with express now
+//allows us to get the data is req.body
+app.use(express.json({ extended: false }));
+
 //create single enpoint to test out
 //take get request to /, callback is req, res, sends data to browser
 app.get('/', (req, res) => res.send('API running'));
