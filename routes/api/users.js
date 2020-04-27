@@ -10,7 +10,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 //bring in config for token variable
 const config = require('config');
-
 //bring in to help with validation
 const { check, validationResult } = require('express-validator');
 
@@ -41,7 +40,7 @@ router.post(
     }
     // destructure
     const { name, email, password } = req.body;
-
+    //create user,
     try {
       let user = await User.findOne({ email });
 
@@ -65,7 +64,7 @@ router.post(
         avatar,
         password,
       });
-      //encrypt password using bcrypt
+      //encrypt password using bcrypt, hash the password, save the user in the db
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
       await user.save();
@@ -75,7 +74,7 @@ router.post(
           id: user.id,
         },
       };
-      //pass in token
+      //sign token, pass in payload, pass in secret, inside callback get back error or get back token
       jwt.sign(
         payload,
         config.get('jwtSecret'),
