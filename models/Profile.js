@@ -3,7 +3,9 @@
 const mongoose = require('mongoose');
 //create profile schema, pass in object with all the fields in the schema
 //create reference to user model, every profile should be associated with user
-//oobjectId is in the user model
+//objectId is in the user model
+//experiences is an array
+//social is an object
 const ProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,

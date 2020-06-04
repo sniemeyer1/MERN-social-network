@@ -13,11 +13,13 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 //bring in to help with validation
 const { check, validationResult } = require('express-validator');
-
+//bring in user model
 const User = require('../../models/User');
 //@route    GET api/auth
-//@desc     test route (what does this route do?)
+//@desc     returns user data
 //@access   Public (if token is needed to access route)
+//make call to db
+//token has the id, don't want to return password
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -55,7 +57,7 @@ router.post(
           .status(400)
           .json({ errors: [{ msg: 'Invalid credentials' }] });
       }
-      //make sure password matches- bcrypt can compare encrypted
+      //make sure password matches- bcrypt can compare encrypted with compare message
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res
